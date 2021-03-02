@@ -1,0 +1,3 @@
+[submodule "lando"]
+	path = lando
+	url = git@gitlab.hosted-tools.com:intractonl/team_d/dvg_docker.git

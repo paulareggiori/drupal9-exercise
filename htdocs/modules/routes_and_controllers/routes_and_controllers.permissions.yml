@@ -1,0 +1,9 @@
+administer routes_and_controllers form:
+  title: 'Admin form view'
+  description: 'View the Admin form'
+  restrict access: TRUE
+
+administer routes_and_controllers access:
+  title: 'Access exercise six'
+  description: 'Permission to view page for exercise six'
+  restrict access: TRUE

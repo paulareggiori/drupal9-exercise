@@ -1,0 +1,52 @@
+routes_and_controllers.example:
+  path: '/routes-and-controllers/example'
+  defaults:
+    _title: 'Example'
+    _controller: '\Drupal\routes_and_controllers\Controller\RoutesAndControllersController::build'
+  requirements:
+    _permission: 'access content'
+
+routes_and_controllers.two:
+  path: '/two'
+  defaults:
+    _title: 'Exercise Two'
+    _controller: '\Drupal\routes_and_controllers\Controller\RoutesAndControllersController::showUser'
+  requirements:
+    _permission: 'access content'
+
+routes_and_controllers.admin_form:
+  path: '/three'
+  defaults:
+    _form: '\Drupal\routes_and_controllers\Form\AdminForm'
+    _title: 'Exercise Three'
+  requirements:
+    _permission: 'Admin form view'
+
+routes_and_controllers.four:
+  path: '/four/{fruit}'
+  defaults:
+    _title: 'Exercise Four'
+    _controller: '\Drupal\routes_and_controllers\Controller\RoutesAndControllersController::favoriteFruit'
+  requirements:
+    _permission: 'access content'
+    fruit: '[a-z]+'
+
+routes_and_controllers.five:
+  path: '/five/{node}'
+  defaults:
+    _title_callback: 'Drupal\routes_and_controllers\Controller\RoutesAndControllersController::findTitle'
+    _controller: '\Drupal\routes_and_controllers\Controller\RoutesAndControllersController::findNode'
+  requirements:
+    _permission: 'access content'
+
+routes_and_controllers.six:
+  path: '/six'
+  defaults:
+    _title: 'Exercise Six'
+    _controller: '\Drupal\routes_and_controllers\Controller\RoutesAndControllersController::useCustomAccess'
+  requirements:
+    _permission: 'access content'
+    _custom_access_check: 'TRUE'
+
+route_callbacks:
+  - '\Drupal\routes_and_controllers\Routing\RouteOne::routes'

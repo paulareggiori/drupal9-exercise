@@ -1,0 +1,72 @@
+{
+    "name": "drupal/my-drupal9-project",
+    "description": "Project template for Drupal 9 projects with composer following drupal/drupal layout",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.drupal.org/project/drupal",
+    "support": {
+        "docs": "https://www.drupal.org/docs/user_guide/en/index.html",
+        "chat": "https://www.drupal.org/node/314178"
+    },
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8",
+            "canonical": false
+        },
+        "core": {
+            "type": "path",
+            "url": "htdocs/core",
+            "canonical": false
+        }
+    },
+    "require": {
+        "composer/installers": "^1.9",
+        "drupal/core-composer-scaffold": "^9.1",
+        "drupal/core-project-message": "^9.1",
+        "drupal/core-recommended": "^9.1",
+        "drupal/core-vendor-hardening": "^9.1",
+        "drupal/redis": "^1.5",
+        "drush/drush": "^10.4"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "./htdocs"
+            }
+        },
+        "installer-paths": {
+            "htdocs/core": [
+                "type:drupal-core"
+            ],
+            "htdocs/libraries/{$name}": [
+                "type:drupal-library"
+            ],
+            "htdocs/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "htdocs/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "htdocs/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/contrib/{$name}": [
+                "type:drupal-drush"
+            ]
+        },
+        "drush": {
+            "services": {
+                "drush.services.yml": "^10"
+            }
+        }
+    }
+}

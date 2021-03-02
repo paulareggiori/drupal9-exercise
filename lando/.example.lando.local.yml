@@ -1,0 +1,15 @@
+# To activate this feature, copy this file as .lando.local.yml.
+# Further read on configuration file load order is available on:
+# https://docs.lando.dev/config/lando.html#base-file
+name: open_online
+recipe: drupal8
+
+config:
+  config:
+    php: config/php/php.ini
+
+services:
+  varnish:
+    config:
+      vcl: config/varnish/default.vcl
+      hit-miss: config/varnish/hit-miss.vcl
