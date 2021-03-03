@@ -10,6 +10,7 @@ namespace Drupal\routes_and_controllers\Controller;
 use Drupal\Component\Datetime\DateTimePlus;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\node\NodeInterface;
 use Drupal\routes_and_controllers\Access\CustomAccess;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node\Entity\Node;
@@ -21,7 +22,19 @@ use Drupal\node\Entity\Node;
  */
 
 class RoutesAndControllersController extends ControllerBase {
+
+  /**
+   * The say something here
+   *
+   * @var blablabla
+   */
   private $user;
+
+  /**
+   * The say something here
+   *
+   * @var blablabla
+   */
   private $title;
 
   /**
@@ -68,6 +81,7 @@ class RoutesAndControllersController extends ControllerBase {
   public function showUser() {
     $build['content'] = [
       '#type' => 'item',
+      #put inside the t function with placeholders
       '#markup' => 'Welcome '. $this->user->getAccountName() .'!',
     ];
 
@@ -96,11 +110,9 @@ class RoutesAndControllersController extends ControllerBase {
    * @oparam int $node
    * @return string
    */
-  public function findTitle(int $node) {
-    $page = Node::load($node);
-    $this->title = $page->label();
+  public function findTitle(NodeInterface $node) {
 
-    return $this->title;
+    return $node->getTitle();
   }
 
   /**
@@ -108,11 +120,11 @@ class RoutesAndControllersController extends ControllerBase {
    *
    * @return array
    */
-  public function findNode() {
+  public function findNode(NodeInterface $node) {
 
     $build['content'] = [
       '#type' => 'item',
-      '#markup' => 'I\'m not actually this'. $this->title . ' page! ;)',
+      '#markup' => 'I\'m not actually this'. $node->getTitle() . ' page! ;)',
     ];
 
     return $build;

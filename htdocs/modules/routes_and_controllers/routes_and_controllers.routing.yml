@@ -15,12 +15,14 @@ routes_and_controllers.two:
     _permission: 'access content'
 
 routes_and_controllers.admin_form:
-  path: '/three'
+  path: '/admin/config/three'
   defaults:
     _form: '\Drupal\routes_and_controllers\Form\AdminForm'
     _title: 'Exercise Three'
   requirements:
-    _permission: 'Admin form view'
+    _permission: 'administer routes_and_controllers form'
+  options:
+    _admin_route: 'TRUE'
 
 routes_and_controllers.four:
   path: '/four/{fruit}'
@@ -39,13 +41,23 @@ routes_and_controllers.five:
   requirements:
     _permission: 'access content'
 
+routes_and_controllers.five02:
+  path: '/five02/{node}'
+  defaults:
+    _title_callback: 'Drupal\routes_and_controllers\Controller\RoutesAndControllersController::findTitle'
+    _controller: '\Drupal\routes_and_controllers\Controller\RoutesAndControllersController::findNode'
+  requirements:
+    _permission: 'access content'
+  parameters:
+    node:
+      type: entity:node
+
 routes_and_controllers.six:
   path: '/six'
   defaults:
     _title: 'Exercise Six'
     _controller: '\Drupal\routes_and_controllers\Controller\RoutesAndControllersController::useCustomAccess'
   requirements:
-    _permission: 'access content'
     _custom_access_check: 'TRUE'
 
 route_callbacks:

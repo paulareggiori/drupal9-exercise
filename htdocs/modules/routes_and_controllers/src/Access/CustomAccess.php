@@ -24,7 +24,7 @@ class CustomAccess  implements AccessInterface {
   public function access(AccountInterface $account) {
     // Check permissions. Pass forward
     // parameters from the route and/or request as needed.
-    return AccessResult::allowedIf($account->hasPermission('Access exercise six'));
+    return AccessResult::allowedIf($account->hasPermission('administer routes_and_controllers access'));
   }
 
 }
