@@ -4,4 +4,4 @@ description: test module for routes and controllers lesson
 package: Custom
 core: 8.x
 core_version_requirement: ^8 || ^9
-configure: routes_and_controllers.admin_form
+configure: routes_and_controllers.adminform
