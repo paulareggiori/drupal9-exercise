@@ -10,6 +10,7 @@ module: {  }
 theme: {  }
 blacklist:
   - admin_form.settings
+  - configsystem.sitename
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: false
