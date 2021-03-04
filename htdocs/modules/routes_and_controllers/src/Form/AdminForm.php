@@ -26,7 +26,7 @@ class AdminForm extends ConfigFormBase{
 
   protected function getEditableConfigNames() {
     return [
-      'admin_form.settings',
+      'routes_and_controllers.settings',
     ];
   }
 
