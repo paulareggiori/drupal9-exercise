@@ -1,0 +1,16 @@
+uuid: 0058f0bf-8640-42b6-9cca-335c890b08e1
+langcode: en
+status: true
+dependencies: {  }
+id: dev
+label: dev
+description: ''
+folder: ../config/dev
+module: {  }
+theme: {  }
+blacklist:
+  - admin_form.settings
+graylist: {  }
+graylist_dependents: true
+graylist_skip_equal: false
+weight: 0

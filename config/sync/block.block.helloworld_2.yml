@@ -1,0 +1,20 @@
+uuid: 337577bc-c688-40ea-ad8e-452a1d923740
+langcode: en
+status: true
+dependencies:
+  module:
+    - custom_plugins
+  theme:
+    - bartik
+id: helloworld_2
+theme: bartik
+region: header
+weight: 0
+provider: null
+plugin: custom_plugins
+settings:
+  id: custom_plugins
+  label: 'Hello world'
+  provider: custom_plugins
+  label_display: visible
+visibility: {  }
