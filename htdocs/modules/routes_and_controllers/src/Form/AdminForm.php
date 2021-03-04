@@ -36,7 +36,7 @@ class AdminForm extends ConfigFormBase{
    * @return array with form fields to be rendered
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('admin_form.settings');
+    $config = $this->config('routes_and_controllers.settings');
     $form['field1'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Field 1'),
@@ -73,15 +73,15 @@ class AdminForm extends ConfigFormBase{
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Save items
-    $this->config('admin_form.settings')
+    $this->config('routes_and_controllers.settings')
       ->set('field1', $form_state->getValue('field1'))
       ->save();
 
-    $this->config('admin_form.settings')
+    $this->config('routes_and_controllers.settings')
       ->set('field2', $form_state->getValue('field2'))
       ->save();
 
-    $this->config('admin_form.settings')
+    $this->config('routes_and_controllers.settings')
       ->set('colour_select', $form_state->getValue('colour_select'))
       ->save();
 
