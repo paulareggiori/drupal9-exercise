@@ -1,0 +1,13 @@
+uuid: 3e4fdc05-f8cc-41de-8d1a-ca3bcef53498
+langcode: en
+status: true
+dependencies: {  }
+id: semiadmin
+label: SemiAdmin
+weight: 3
+is_admin: null
+permissions:
+  - 'access content'
+  - 'administer routes_and_controllers access'
+  - 'administer routes_and_controllers configuration2'
+  - 'administer routes_and_controllers form'
