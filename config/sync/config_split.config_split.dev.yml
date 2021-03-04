@@ -9,8 +9,7 @@ folder: ../config/dev
 module: {  }
 theme: {  }
 blacklist:
-  - admin_form.settings
-  - configsystem.sitename
+  - system.site
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: false

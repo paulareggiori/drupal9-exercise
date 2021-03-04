@@ -9,8 +9,7 @@ folder: ''
 module: {  }
 theme: {  }
 blacklist: {  }
-graylist:
-  - configsystem.sitename
+graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: false
 weight: 0
