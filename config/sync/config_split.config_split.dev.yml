@@ -1,4 +1,4 @@
-uuid: 0058f0bf-8640-42b6-9cca-335c890b08e1
+uuid: 900664cc-f399-48da-bd85-efa05e800fd9
 langcode: en
 status: true
 dependencies: {  }
@@ -12,5 +12,5 @@ blacklist:
   - system.site
 graylist: {  }
 graylist_dependents: true
-graylist_skip_equal: false
+graylist_skip_equal: true
 weight: 0

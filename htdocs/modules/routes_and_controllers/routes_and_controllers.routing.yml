@@ -14,7 +14,7 @@ routes_and_controllers.two:
   requirements:
     _permission: 'access content'
 
-routes_and_controllers.admin_form:
+routes_and_controllers.adminform:
   path: '/admin/config/three'
   defaults:
     _form: '\Drupal\routes_and_controllers\Form\AdminForm'

@@ -1,16 +1,16 @@
-uuid: 77d822d3-02e1-4f61-9662-d5d1edde9594
+uuid: c192ec17-6ffd-40e4-8688-d83d5f6f2fc4
 langcode: en
 status: true
 dependencies: {  }
-id: prod
-label: prod
+id: development
+label: development
 description: ''
-folder: ''
+folder: ../config/development
 module: {  }
 theme: {  }
-blacklist: {  }
-graylist:
+blacklist:
   - system.site
+graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: false
 weight: 0
