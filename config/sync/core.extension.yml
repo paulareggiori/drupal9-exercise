@@ -15,6 +15,7 @@ module:
   custom_plugins: 0
   datetime: 0
   dblog: 0
+  devel: 0
   dynamic_page_cache: 0
   editor: 0
   field: 0
@@ -36,6 +37,7 @@ module:
   path_alias: 0
   quickedit: 0
   rdf: 0
+  routes_and_controllers: 0
   search: 0
   shortcut: 0
   system: 0

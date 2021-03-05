@@ -6,7 +6,8 @@ id: dev
 label: dev
 description: ''
 folder: ../config/dev
-module: {  }
+module:
+  devel: 0
 theme: {  }
 blacklist:
   - system.site
