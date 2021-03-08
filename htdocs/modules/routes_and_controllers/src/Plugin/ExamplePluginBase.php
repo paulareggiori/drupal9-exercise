@@ -47,8 +47,8 @@ abstract class ExamplePluginBase extends PluginBase implements ExampleInterface 
   /**
    * {@inheritdoc}
    */
-  public function transform($label) {
-    return $label;
+  public function transform($text) {
+    return $text;
   }
 
 

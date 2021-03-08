@@ -105,12 +105,11 @@ class AdminForm extends ConfigFormBase {
         'name' => 'colour_select',
       ],
     ];
+
     $form['transform'] = [
       '#type' => 'select',
       '#title' => $this->t('Show text in form'),
       '#attributes' => [
-        //define static name and id so we can easier select it
-        // 'id' => 'colour_select',
         'name' => 'text_transform',
       ],
     ];
@@ -120,10 +119,10 @@ class AdminForm extends ConfigFormBase {
     $plugin_definitions = $this->manager->getDefinitions();
 
     // Let's output a list of the plugin definitions we now have.
-    $form['transform']['options'] = array();
+    $form['transform']['#options'] = array();
     foreach ($plugin_definitions as $plugin_definition) {
       // Here we use various properties from the plugin definition.
-      $form['transform']['options'] = t("@id (name: @name)", array(
+      $form['transform']['#options'] = $this->t("@id (name: @name)", array(
         '@id' => $plugin_definition['id'],
         '@name' => $plugin_definition['name'],
       ));

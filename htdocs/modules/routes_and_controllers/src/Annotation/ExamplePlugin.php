@@ -55,13 +55,4 @@ class ExamplePlugin extends Plugin {
    * @ingroup plugin_translatable
    */
   public $description;
-
-  /**
-   * The number of calories per serving of this sandwich type.
-   *
-   * This property is a float value, so we indicate that to other developers
-   * who are writing annotations for a Sandwich plugin.
-   *
-   * @var int
-   */
 }

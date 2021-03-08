@@ -5,6 +5,8 @@ namespace Drupal\routes_and_controllers\Plugin\Example;
 
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\routes_and_controllers\Plugin\ExamplePluginBase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 
 /**
  * Provides a transformation of label into uppercase letters.
@@ -26,14 +28,9 @@ class AllUp extends ExamplePluginBase implements ContainerFactoryPluginInterface
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
 
-  public function transform($label) {
-    // Insert code to query the international chocolate database for the current
-    // going rate of cocoa and then determine the price per scoop of Chocolate
-    // ice cream, or simply return the default price if we can't determine one.
-    //
-    // Magic ...
-    //
-    return $label;
+  public function transform($text) {
+    // Insert code to actually transform the text.
+    return $text;
   }
 
   /**
