@@ -1,6 +1,11 @@
 services:
   routes_and_controllers.access_checker:
-    class: Drupal\example\Access\CustomAccess
+    class: Drupal\routes_and_controllers\Access\CustomAccess
     arguments: ['@current_user']
     tags:
       - { name: access_check, applies_to: _custom_access_check }
+
+  routes_and_controllers.plugin_manager_example:
+    # This tells the service container the name of our plugin manager class.
+    class: Drupal\routes_and_controllers\Plugin\ExamplePluginManager
+    parent: default_plugin_manager

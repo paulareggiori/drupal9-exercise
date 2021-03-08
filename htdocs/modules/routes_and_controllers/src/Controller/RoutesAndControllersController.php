@@ -24,18 +24,11 @@ use Drupal\node\Entity\Node;
 class RoutesAndControllersController extends ControllerBase {
 
   /**
-   * The say something here
+   * The current user service.
    *
-   * @var blablabla
+   * @var Drupal\Core\Session\AccountProxyInterface
    */
   private $user;
-
-  /**
-   * The say something here
-   *
-   * @var blablabla
-   */
-  private $title;
 
   /**
    * Constructs the container

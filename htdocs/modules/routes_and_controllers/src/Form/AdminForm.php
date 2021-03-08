@@ -8,13 +8,56 @@ namespace Drupal\routes_and_controllers\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\routes_and_controllers\Plugin\ExamplePluginManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class AdminForm
  *
  * Returns a form.
  */
-class AdminForm extends ConfigFormBase{
+class AdminForm extends ConfigFormBase {
+
+  /**
+   * The example plugin manager.
+   *
+   * We use this to get all of the example plugins.
+   *
+   * @var \Drupal\routes_and_controllers\Plugin\ExamplePluginManager
+   */
+  protected $manager;
+
+  /**
+   * We use this to get all of the example plugins definitions.
+   *
+   * @var array of all plugin definitions
+   */
+  protected $plugin_definitions;
+
+  /**
+   * Constructor.
+   *
+   * @param \Drupal\routes_and_controllers\Plugin\ExamplePluginManager $manager
+   *   The example plugin manager service. We're injecting this service so that
+   *   we can use it to access the example plugins.
+   */
+  public function __construct(ExamplePluginManager $manager) {
+    $this->manager = $manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * Override the parent method so that we can inject our sandwich plugin
+   * manager service into the controller.
+   *
+   * For more about how dependency injection works read https://www.drupal.org/node/2133171
+   */
+  public static function create(ContainerInterface $container) {
+    $manager= $container->get('plugin_manager_example');
+    return new static($manager);
+  }
+
   /**
    * Returns form id.
    *
@@ -62,6 +105,29 @@ class AdminForm extends ConfigFormBase{
         'name' => 'colour_select',
       ],
     ];
+    $form['transform'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Show text in form'),
+      '#attributes' => [
+        //define static name and id so we can easier select it
+        // 'id' => 'colour_select',
+        'name' => 'text_transform',
+      ],
+    ];
+
+    // Get the list of all the plugins defined on the system from the
+    // plugin manager.
+    $plugin_definitions = $this->manager->getDefinitions();
+
+    // Let's output a list of the plugin definitions we now have.
+    $form['transform']['options'] = array();
+    foreach ($plugin_definitions as $plugin_definition) {
+      // Here we use various properties from the plugin definition.
+      $form['transform']['options'] = t("@id (name: @name)", array(
+        '@id' => $plugin_definition['id'],
+        '@name' => $plugin_definition['name'],
+      ));
+    }
 
     return parent::buildForm($form, $form_state);
   }
@@ -85,8 +151,12 @@ class AdminForm extends ConfigFormBase{
       ->set('colour_select', $form_state->getValue('colour_select'))
       ->save();
 
-    parent::submitForm($form, $form_state);
+    $this->config('routes_and_controllers.settings')
+      ->set('text_transform', $form_state->getValue('text_transform'))
+      ->save();
 
+    parent::submitForm($form, $form_state);
   }
+
 
 }
