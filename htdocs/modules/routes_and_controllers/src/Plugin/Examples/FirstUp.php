@@ -9,17 +9,16 @@ use Drupal\routes_and_controllers\Plugin\ExamplePluginBase;
  * Provides a transformation of label into uppercase letters.
  *
  * @ExamplePlugin (
- *   id = "allupper",
- *   name = @Translation("All Uppercase"),
- *   description = @Translation("Change letter to all uppercase"),
+ *   id = "firstup",
+ *   name = @Translation("Only First Letters Uppercase"),
+ *   description = @Translation("Change the first letter of all words to uppercase"),
  * )
  */
-class AllUp extends ExamplePluginBase {
+class FirstUp extends ExamplePluginBase {
 
   public function transform($text) {
     // Insert code to actually transform the text.
-    $text = strtoupper($text);
+    $text = ucwords($text);
     return $text;
   }
 }
-

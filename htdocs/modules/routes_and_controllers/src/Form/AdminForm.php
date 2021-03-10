@@ -11,12 +11,19 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\routes_and_controllers\Plugin\ExamplePluginManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+
 /**
  * Class AdminForm
  *
  * Returns a form.
  */
 class AdminForm extends ConfigFormBase {
+  /**
+   * Config settings.
+   *
+   * @var string
+   */
+  const SETTINGS = 'routes_and_controllers.settings';
 
   /**
    * The example plugin manager.
@@ -28,11 +35,32 @@ class AdminForm extends ConfigFormBase {
   protected $manager;
 
   /**
+   * The id of the plugin set in settings file.
+   *
+   * @var plugin id
+   */
+  protected $id;
+
+  /**
+   * The plugin with it's0 definitions.
+   *
+   * @var \Drupal\routes_and_controllers\Plugin\ExamplePluginBase
+   */
+  protected $plugin;
+
+  /**
    * We use this to get all of the example plugins definitions.
    *
    * @var array of all plugin definitions
    */
   protected $plugin_definitions;
+
+  /**
+   * An array with all the plugins as options in the form.
+   *
+   * @var array of plugins as options.
+   */
+  protected $options;
 
   /**
    * Constructor.
@@ -54,7 +82,7 @@ class AdminForm extends ConfigFormBase {
    * For more about how dependency injection works read https://www.drupal.org/node/2133171
    */
   public static function create(ContainerInterface $container) {
-    $manager= $container->get('plugin_manager_example');
+    $manager= $container->get('routes_and_controllers.plugin_manager_example');
     return new static($manager);
   }
 
@@ -69,7 +97,7 @@ class AdminForm extends ConfigFormBase {
 
   protected function getEditableConfigNames() {
     return [
-      'routes_and_controllers.settings',
+      static::SETTINGS,
     ];
   }
 
@@ -79,20 +107,29 @@ class AdminForm extends ConfigFormBase {
    * @return array with form fields to be rendered
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('routes_and_controllers.settings');
+
+    $config = $this->config(static::SETTINGS);
+
+    /**
+     * Defines what is the setting for the text transformation.
+     */
+    $id = $config->get('text_transform');
+
+    $plugin = $this->manager->createInstance($id);
+
     $form['field1'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Field 1'),
+      '#title' => $plugin->transform($this->t('Field 1')),
       '#default_value' => $config->get('field1'),
     ];
     $form['field2'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Field 2'),
+      '#title' => $plugin->transform($this->t('Field 2')),
       '#default_value' => $config->get('field2'),
     ];
     $form['colour_select'] = [
       '#type' => 'radios',
-      '#title' => $this->t('Pick a colour'),
+      '#title' => $plugin->transform($this->t('Pick a colour')),
       '#options' => [
         'blue' => $this->t('Blue'),
         'white' => $this->t('White'),
@@ -106,27 +143,28 @@ class AdminForm extends ConfigFormBase {
       ],
     ];
 
-    $form['transform'] = [
+    /**
+     * Get the list of all the plugins defined on the system from the
+     * plugin manager.
+     */
+    $plugin_definitions = $this->manager->getDefinitions();
+
+    /**
+     * Put the plugin definitions into an array.
+     */
+    foreach ($plugin_definitions as $plugin_definition) {
+      // Here we use various properties from the plugin definition.
+      $options[$plugin_definition['id']] = $plugin_definition['name'];
+    }
+
+    $form['text_transform'] = [
       '#type' => 'select',
-      '#title' => $this->t('Show text in form'),
+      '#title' => $plugin->transform($this->t('Show text in form')),
+      '#options' => $options,
       '#attributes' => [
         'name' => 'text_transform',
       ],
     ];
-
-    // Get the list of all the plugins defined on the system from the
-    // plugin manager.
-    $plugin_definitions = $this->manager->getDefinitions();
-
-    // Let's output a list of the plugin definitions we now have.
-    $form['transform']['#options'] = array();
-    foreach ($plugin_definitions as $plugin_definition) {
-      // Here we use various properties from the plugin definition.
-      $form['transform']['#options'] = $this->t("@id (name: @name)", array(
-        '@id' => $plugin_definition['id'],
-        '@name' => $plugin_definition['name'],
-      ));
-    }
 
     return parent::buildForm($form, $form_state);
   }

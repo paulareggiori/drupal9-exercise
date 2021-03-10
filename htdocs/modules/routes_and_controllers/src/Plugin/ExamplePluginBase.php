@@ -3,8 +3,10 @@
 
 namespace Drupal\routes_and_controllers\Plugin;
 
-
 use Drupal\Component\Plugin\PluginBase;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 
 /**
  * Provides \Drupal\routes_and_controllers\Plugin\ExamplePluginBase.
@@ -28,7 +30,16 @@ use Drupal\Component\Plugin\PluginBase;
  * @see \Drupal\routes_and_controllers\Annotation\ExamplePlugin
  * @see \Drupal\routes_and_controllers\Plugin\ExampleInterface
  */
-abstract class ExamplePluginBase extends PluginBase implements ExampleInterface {
+abstract class ExamplePluginBase extends PluginBase implements ExampleInterface, ContainerFactoryPluginInterface {
+
+  /**
+   * @param array $configuration
+   * @param string $plugin_id
+   * @param mixed $plugin_definition
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+  }
 
   /**
    * {@inheritdoc}
@@ -51,5 +62,16 @@ abstract class ExamplePluginBase extends PluginBase implements ExampleInterface 
     return $text;
   }
 
+  /**
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   * @param array $configuration
+   * @param string $plugin_id
+   * @param mixed $plugin_definition
+   *
+   * @return static
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static ($configuration, $plugin_id, $plugin_definition);
+  }
 
 }

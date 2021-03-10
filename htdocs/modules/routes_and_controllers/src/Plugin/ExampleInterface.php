@@ -25,7 +25,7 @@ use Drupal\Component\Plugin\PluginInspectionInterface;
 /**
  * An interface for all Example type plugins.
  */
-class ExampleInterface extends PluginInspectionInterface {
+interface ExampleInterface extends PluginInspectionInterface {
 
   /**
    * Provide the name of the plugin.
@@ -49,6 +49,6 @@ class ExampleInterface extends PluginInspectionInterface {
    * @return string
    *   The lable after the tranformation.
    */
-  public function transform(string $label);
+  public function transform($text);
 
 }

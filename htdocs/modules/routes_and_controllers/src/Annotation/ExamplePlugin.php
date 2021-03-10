@@ -14,7 +14,9 @@ namespace Drupal\routes_and_controllers\Annotation;
 use Drupal\Component\Annotation\Plugin;
 
 /**
- * Defines a Sandwich annotation object.
+ * Defines a Example0 annotation object.
+ *
+ * Plugin Namespace: Plugin\Examples\PluginName
  *
  * @see \Drupal\routes_and_controllers\Plugin\ExamplePluginManager
  * @see plugin_api
